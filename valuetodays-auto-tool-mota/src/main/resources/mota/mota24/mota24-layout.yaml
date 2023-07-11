@@ -1,0 +1,123 @@
+layout:
+  - foor: 1
+    down:
+      - item: RED_KEY#1
+      - item: RED_DOOR#1
+        children:
+        - item: YELLOW_DOOR#1
+          children:
+          - item: 骷髅人#1
+            children:
+            - item: 红宝石#1
+            - item: 红血瓶#1
+            - item: 黄钥匙#3
+            - item: 骷髅人#2
+              children:
+              - item: YELLOW_DOOR#2
+                children:
+                - item: 骷髅士兵#1
+                  children:
+                  - item: YELLOW_KEY#5
+                  - item: BLUE_KEY#1
+                  - item: 蓝宝石#1
+                  - item: YELLOW_DOOR#4
+                    children:
+                    - item: 骷髅士兵#2
+                      children:
+                      - item: 红血瓶#6
+                      - item: 红血瓶#7
+                      - item: 蓝血瓶#1
+                      - item: 黄钥匙#6
+                      - item: 黄钥匙#8
+                      - item: 怪物图鉴
+        - item: YELLOW_DOOR#3
+          children:
+          - item: 初级魔法师#1
+            children:
+            - item: 绿头怪#3
+              children:
+              - item: 小蝙蝠#1
+                children:
+                - item: 青头怪
+                  children:
+                  - item: 红血瓶#2
+                  - item: 红血瓶#3
+                  - item: 红血瓶#4
+                  - item: 红血瓶#5
+                  - item: YELLOW_KEY#2
+                  - item: YELLOW_KEY#4
+        - item: YELLOW_DOOR#5
+          children:
+          - item: 兽面人#1
+            children:
+            - item: YELLOW_KEY#7
+            - item: YELLOW_KEY#9
+            - item: YELLOW_KEY#10
+            - item: YELLOW_KEY#11
+            - item: BLUE_KEY#2
+        - item: 绿头怪#2
+          children:
+          - item: 红头怪#1
+            children:
+            - item: 绿头怪#1
+              children:
+              - item: YELLOW_KEY#1
+                children:
+                - item: up
+  - foor: 2
+  - foor: 3
+    down:
+      - item: 小蝙蝠#5
+        children:
+        - item: 绿头怪#2
+          children:
+          - item: 绿头怪#1
+            children:
+            - item: YELLOW_DOOR#2
+              children:
+              - item: 骷髅人#1
+                children:
+                - item: YELLOW_KEY#1
+                - item: YELLOW_KEY#2
+                - item: YELLOW_KEY#3
+                - item: 红头怪#1
+                - item: 红头怪#2
+                  children:
+                  - item: 铁剑#1
+            - item: 小蝙蝠#3
+              children:
+              - item: 红头怪#4
+                children:
+                - item: 小蝙蝠#4
+                  children:
+                  - item: 骷髅人#2
+                    children:
+                    - item: YELLOW_DOOR#1
+                      children:
+                      - item: 商店3楼
+                  - item: YELLOW_DOOR#3
+                    children:
+                    - item: 红头怪#6
+                      children:
+                      - item: 红宝石#1
+                      - item: 蓝宝石#1
+                      - item: 蓝血瓶#1
+                      - item: YELLOW_KEY#8
+                      - item: YELLOW_KEY#7
+                    - item: 红头怪#7
+                    - item: 小蝙蝠#6
+                  - item: YELLOW_KEY#6
+                    children:
+                    - item: YELLOW_KEY#5
+                      children:
+                      - item: YELLOW_KEY#4
+                        children:
+                        - item: 小蝙蝠#1
+                          children:
+                          - item: 红头怪#3
+                            children:
+                            - item: 小蝙蝠#2
+                              children:
+                              - item: 红头怪#5
+                                children:
+                                - item: up

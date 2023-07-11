@@ -1,0 +1,601 @@
+items:
+  - id: 1
+    type: "HP_BOTTLE"
+    name: "红血瓶"
+    hp: 200
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 2
+    type: "HP_BOTTLE"
+    name: "蓝血瓶"
+    hp: 500
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 15
+    type: "YELLOW_KEY"
+    name: "黄钥匙"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 16
+    type: "YELLOW_DOOR"
+    name: "黄门"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 17
+    type: "RED_KEY"
+    name: "红钥匙"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 18
+    type: "RED_DOOR"
+    name: "红门"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 25
+    type: "ATK_DIAMOND"
+    name: "红宝石"
+    hp: 0
+    attack: 3
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 26
+    type: "DFD_DIAMOND"
+    name: "蓝宝石"
+    hp: 0
+    attack: 0
+    defend: 3
+    gold: 0
+    exp: 0
+  - id: 28
+    type: "ENEMY"
+    name: "绿头怪"
+    hp: 50
+    attack: 20
+    defend: 1
+    gold: 1
+    exp: 1
+  - id: 29
+    type: "ENEMY"
+    name: "红头怪"
+    hp: 70
+    attack: 15
+    defend: 2
+    gold: 2
+    exp: 2
+  - id: 30
+    type: "ENEMY"
+    name: "青头怪"
+    hp: 200
+    attack: 35
+    defend: 10
+    gold: 5
+    exp: 5
+  - id: 31
+    type: "ENEMY"
+    name: "怪王"
+    hp: 700
+    attack: 250
+    defend: 125
+    gold: 32
+    exp: 30
+  - id: 32
+    type: "ENEMY"
+    name: "小蝙蝠"
+    hp: 100
+    attack: 20
+    defend: 5
+    gold: 3
+    exp: 3
+  - id: 33
+    type: "ENEMY"
+    name: "大蝙蝠"
+    hp: 150
+    attack: 65
+    defend: 30
+    gold: 10
+    exp: 8
+  - id: 34
+    type: "ENEMY"
+    name: "红蝙蝠"
+    hp: 550
+    attack: 160
+    defend: 90
+    gold: 25
+    exp: 20
+  - id: 35
+    type: "ENEMY"
+    name: "冥灵魔王"
+    hp: 30000
+    attack: 1700
+    defend: 1500
+    gold: 250
+    exp: 220
+  - id: 36
+    type: "ENEMY"
+    name: "冥灵魔王2"
+    hp: 45000
+    attack: 2550
+    defend: 2250
+    gold: 312
+    exp: 275
+  - id: 37
+    type: "ENEMY"
+    name: "冥灵魔王3"
+    hp: 60000
+    attack: 3400
+    defend: 3000
+    gold: 390
+    exp: 343
+  - id: 38
+    type: "ENEMY"
+    name: "骷髅人"
+    hp: 110
+    attack: 25
+    defend: 5
+    gold: 5
+    exp: 4
+  - id: 39
+    type: "ENEMY"
+    name: "骷髅士兵"
+    hp: 150
+    attack: 40
+    defend: 20
+    gold: 8
+    exp: 6
+  - id: 40
+    type: "ENEMY"
+    name: "骷髅队长"
+    hp: 400
+    attack: 90
+    defend: 50
+    gold: 15
+    exp: 12
+  - id: 41
+    type: "ENEMY"
+    name: "冥队长"
+    hp: 2500
+    attack: 900
+    defend: 850
+    gold: 84
+    exp: 75
+  - id: 42
+    type: "ENEMY"
+    name: "兽面人"
+    hp: 300
+    attack: 75
+    defend: 45
+    gold: 13
+    exp: 10
+  - id: 43
+    type: "ENEMY"
+    name: "兽面武士"
+    hp: 900
+    attack: 450
+    defend: 330
+    gold: 50
+    exp: 50
+  - id: 44
+    type: "ENEMY"
+    name: "石头人"
+    hp: 500
+    attack: 115
+    defend: 65
+    gold: 15
+    exp: 15
+  - id: 45
+    type: "ENEMY"
+    name: "影子战士"
+    hp: 3100
+    attack: 1150
+    defend: 1050
+    gold: 92
+    exp: 80
+  - id: 46
+    type: "ENEMY"
+    name: "初级法师"
+    hp: 125
+    attack: 50
+    defend: 25
+    gold: 10
+    exp: 7
+  - id: 47
+    type: "ENEMY"
+    name: "高级法师"
+    hp: 100
+    attack: 200
+    defend: 110
+    gold: 30
+    exp: 25
+  - id: 48
+    type: "ENEMY"
+    name: "麻衣法师"
+    hp: 250
+    attack: 120
+    defend: 70
+    gold: 20
+    exp: 17
+  - id: 49
+    type: "ENEMY"
+    name: "红衣法师"
+    hp: 500
+    attack: 400
+    defend: 260
+    gold: 47
+    exp: 45
+  - id: 50
+    type: "ENEMY"
+    name: "初级卫兵"
+    hp: 450
+    attack: 150
+    defend: 90
+    gold: 22
+    exp: 19
+  - id: 51
+    type: "ENEMY"
+    name: "中级卫兵"
+    hp: 1250
+    attack: 500
+    defend: 400
+    gold: 55
+    exp: 55
+  - id: 52
+    type: "ENEMY"
+    name: "高级卫兵"
+    hp: 1500
+    attack: 560
+    defend: 460
+    gold: 60
+    exp: 60
+  - id: 53
+    type: "ENEMY"
+    name: "双手剑士"
+    hp: 1200
+    attack: 620
+    defend: 520
+    gold: 65
+    exp: 75
+  - id: 54
+    type: "ENEMY"
+    name: "冥战士"
+    hp: 2000
+    attack: 680
+    defend: 590
+    gold: 70
+    exp: 65
+  - id: 55
+    type: "ENEMY"
+    name: "金卫士"
+    hp: 850
+    attack: 350
+    defend: 200
+    gold: 45
+    exp: 40
+  - id: 56
+    type: "ENEMY"
+    name: "金队长"
+    hp: 900
+    attack: 750
+    defend: 650
+    gold: 77
+    exp: 70
+  - id: 57
+    type: "ENEMY"
+    name: "灵武士"
+    hp: 1200
+    attack: 980
+    defend: 900
+    gold: 88
+    exp: 75
+  - id: 58
+    type: "ENEMY"
+    name: "黑衣魔王"
+    hp: 1000
+    attack: 500
+    defend: 0
+    gold: 1000
+    exp: 1000
+  - id: 59
+    type: "ENEMY"
+    name: "黄衣魔王"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 60
+    type: "ENEMY"
+    name: "青衣武士"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 61
+    type: "ENEMY"
+    name: "蓝骑士"
+    hp: 100
+    attack: 120
+    defend: 0
+    gold: 9
+    exp: 0
+  - id: 62
+    type: "ENEMY"
+    name: "黄头怪"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 63
+    type: "ENEMY"
+    name: "紫骷髅"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 64
+    type: "ENEMY"
+    name: "紫蝙蝠"
+    hp: 100
+    attack: 120
+    defend: 0
+    gold: 14
+    exp: 0
+  - id: 65
+    type: "ENEMY"
+    name: "铁面人"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 66
+    type: "ENEMY"
+    name: "骷髅法师"
+    hp: 100
+    attack: 100
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 67
+    type: "ENEMY"
+    name: "骷髅王"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 68
+    type: "ENEMY"
+    name: "骷髅巫师"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 69
+    type: "ENEMY"
+    name: "骷髅武士"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 70
+    type: "ENEMY"
+    name: "迷失勇者"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 71
+    type: "ENEMY"
+    name: "魔神武士"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 72
+    type: "ENEMY"
+    name: "魔神法师"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 73
+    type: "ENEMY"
+    name: "金角怪"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 74
+    type: "ENEMY"
+    name: "红衣魔王"
+    hp: 15000
+    attack: 1000
+    defend: 1000
+    gold: 100
+    exp: 100
+  - id: 75
+    type: "ENEMY"
+    name: "白衣武士"
+    hp: 1300
+    attack: 300
+    defend: 150
+    gold: 40
+    exp: 35
+  - id: 76
+    type: "ENEMY"
+    name: "灵法师"
+    hp: 1500
+    attack: 830
+    defend: 730
+    gold: 80
+    exp: 70
+  - id: 77
+    type: "ENEMY"
+    name: "银头怪"
+    hp: 100
+    attack: 120
+    defend: 0
+    gold: 15
+    exp: 0
+  - id: 78
+    type: "ENEMY"
+    name: "剑圣"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 79
+    type: "ENEMY"
+    name: "尖角怪"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 80
+    type: "ENEMY"
+    name: "痛苦魔女"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 81
+    type: "ENEMY"
+    name: "黑暗仙子"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 82
+    type: "ENEMY"
+    name: "中级法师"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 83
+    type: "ENEMY"
+    name: "剑王"
+    hp: 100
+    attack: 120
+    defend: 0
+    gold: 7
+    exp: 0
+  - id: 84
+    type: "ENEMY"
+    name: "水银战士"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 85
+    type: "ENEMY"
+    name: "绿兽人"
+    hp: 100
+    attack: 120
+    defend: 0
+    gold: 13
+    exp: 0
+  - id: 86
+    type: "ENEMY"
+    name: "魔龙"
+    hp: 99999
+    attack: 9999
+    defend: 5000
+    gold: 0
+    exp: 0
+  - id: 87
+    type: "ENEMY"
+    name: "血影"
+    hp: 99999
+    attack: 5000
+    defend: 4000
+    gold: 0
+    exp: 0
+  - id: 88
+    type: "ENEMY"
+    name: "仙子"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 89
+    type: "ENEMY"
+    name: "强盾骑士"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 90
+    type: "ENEMY"
+    name: "天使"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 91
+    type: "ENEMY"
+    name: "元素生物"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 92
+    type: "ENEMY"
+    name: "铁守卫"
+    hp: 0
+    attack: 0
+    defend: 0
+    gold: 0
+    exp: 0
+  - id: 93
+    type: "ENEMY"
+    name: "邪恶蝙蝠"
+    hp: 1000
+    attack: 1
+    defend: 0
+    gold: 0
+    exp: 0
+# 如下是手动添加
+  - type: "WEAPON"
+    name: "铁剑"
+    hp: 0
+    attack: 10
+    defend: 0
+    gold: 0
+    exp: 0

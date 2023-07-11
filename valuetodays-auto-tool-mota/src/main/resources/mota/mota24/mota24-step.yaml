@@ -1,0 +1,206 @@
+stepList:
+  - title: 'fix-step'
+    floor: '1'
+    type: 'SIMPLE'
+    steps:
+      - { floor: '1', item: "RED_KEY#1" }
+      - { floor: '1', item: "RED_DOOR#1" }
+      - { floor: '1', item: "绿头怪#2" }
+      - { floor: '1', item: "红头怪#1" }
+      - { floor: '1', item: "绿头怪#1" }
+      - { floor: '1', item: "YELLOW_KEY#1" }
+  - title: 'branch-step'
+    type: 'BRANCH'
+    branchSteps:
+      "先拿红宝石、剑、宝石对":
+        steps:
+          - { floor: '1', item: "YELLOW_DOOR#1" }
+          - { floor: '1', item: "骷髅人#1" }
+          - { floor: '1', item: "红宝石#1" }
+          - { floor: '1', item: "红血瓶#1" }
+          - { floor: '1', item: "黄钥匙#3" }
+
+          - { floor: '3', item: "小蝙蝠#5" }
+          - { floor: '3', item: "绿头怪#2" }
+          - { floor: '3', item: "绿头怪#1" }
+          - { floor: '3', item: "YELLOW_DOOR#2" }
+          - { floor: '3', item: "骷髅人#1" }
+          - { floor: '3', item: "YELLOW_KEY#1" }
+          - { floor: '3', item: "YELLOW_KEY#2" }
+          - { floor: '3', item: "YELLOW_KEY#3" }
+          - { floor: '3', item: "红头怪#2" }
+          - { floor: '3', item: "铁剑#1" }
+
+          - { floor: '3', item: "小蝙蝠#3" }
+          - { floor: '3', item: "红头怪#4" }
+          - { floor: '3', item: "小蝙蝠#4" }
+          - { floor: '3', item: "YELLOW_KEY#6" }
+          - { floor: '3', item: "YELLOW_KEY#5" }
+          - { floor: '3', item: "YELLOW_KEY#4" }
+          - { floor: '3', item: "YELLOW_DOOR#3" }
+          - { floor: '3', item: "红头怪#6" }
+          - { floor: '3', item: "红宝石#1" }
+          - { floor: '3', item: "蓝宝石#1" }
+          - { floor: '3', item: "蓝血瓶#1" }
+          - { floor: '3', item: "YELLOW_KEY#8" }
+          - { floor: '3', item: "YELLOW_KEY#7" }
+      "先拿红宝石、宝石对、剑":
+        steps:
+          - { floor: '1', item: "YELLOW_DOOR#1" }
+          - { floor: '1', item: "骷髅人#1" }
+          - { floor: '1', item: "红宝石#1" }
+          - { floor: '1', item: "红血瓶#1" }
+          - { floor: '1', item: "黄钥匙#3" }
+
+          - { floor: '3', item: "小蝙蝠#5" }
+          - { floor: '3', item: "绿头怪#2" }
+          - { floor: '3', item: "绿头怪#1" }
+          - { floor: '3', item: "小蝙蝠#3" }
+          - { floor: '3', item: "红头怪#4" }
+          - { floor: '3', item: "小蝙蝠#4" }
+          - { floor: '3', item: "YELLOW_KEY#6" }
+          - { floor: '3', item: "YELLOW_KEY#5" }
+          - { floor: '3', item: "YELLOW_KEY#4" }
+          - { floor: '3', item: "YELLOW_DOOR#3" }
+          - { floor: '3', item: "红头怪#6" }
+          - { floor: '3', item: "红宝石#1" }
+          - { floor: '3', item: "蓝宝石#1" }
+          - { floor: '3', item: "蓝血瓶#1" }
+          - { floor: '3', item: "YELLOW_KEY#8" }
+          - { floor: '3', item: "YELLOW_KEY#7" }
+
+          - { floor: '3', item: "YELLOW_DOOR#2" }
+          - { floor: '3', item: "骷髅人#1" }
+          - { floor: '3', item: "YELLOW_KEY#1" }
+          - { floor: '3', item: "YELLOW_KEY#2" }
+          - { floor: '3', item: "YELLOW_KEY#3" }
+          - { floor: '3', item: "红头怪#2" }
+          - { floor: '3', item: "铁剑#1" }
+      "先拿剑、红宝石、宝石对":
+        steps:
+          - { floor: '3', item: "小蝙蝠#5" }
+          - { floor: '3', item: "绿头怪#2" }
+          - { floor: '3', item: "绿头怪#1" }
+          - { floor: '3', item: "YELLOW_DOOR#2" }
+          - { floor: '3', item: "骷髅人#1" }
+          - { floor: '3', item: "YELLOW_KEY#1" }
+          - { floor: '3', item: "YELLOW_KEY#2" }
+          - { floor: '3', item: "YELLOW_KEY#3" }
+          - { floor: '3', item: "红头怪#2" }
+          - { floor: '3', item: "铁剑#1" }
+
+          - { floor: '1', item: "YELLOW_DOOR#1" }
+          - { floor: '1', item: "骷髅人#1" }
+          - { floor: '1', item: "红宝石#1" }
+          - { floor: '1', item: "红血瓶#1" }
+          - { floor: '1', item: "黄钥匙#3" }
+
+          - { floor: '3', item: "小蝙蝠#3" }
+          - { floor: '3', item: "红头怪#4" }
+          - { floor: '3', item: "小蝙蝠#4" }
+          - { floor: '3', item: "YELLOW_KEY#6" }
+          - { floor: '3', item: "YELLOW_KEY#5" }
+          - { floor: '3', item: "YELLOW_KEY#4" }
+          - { floor: '3', item: "YELLOW_DOOR#3" }
+          - { floor: '3', item: "红头怪#6" }
+          - { floor: '3', item: "红宝石#1" }
+          - { floor: '3', item: "蓝宝石#1" }
+          - { floor: '3', item: "蓝血瓶#1" }
+          - { floor: '3', item: "YELLOW_KEY#8" }
+          - { floor: '3', item: "YELLOW_KEY#7" }
+      "先拿剑、宝石对、红宝石【最优解】":
+        steps:
+          - { floor: '3', item: "小蝙蝠#5" }
+          - { floor: '3', item: "绿头怪#2" }
+          - { floor: '3', item: "绿头怪#1" }
+          - { floor: '3', item: "YELLOW_DOOR#2" }
+          - { floor: '3', item: "骷髅人#1" }
+          - { floor: '3', item: "YELLOW_KEY#1" }
+          - { floor: '3', item: "YELLOW_KEY#2" }
+          - { floor: '3', item: "YELLOW_KEY#3" }
+          - { floor: '3', item: "红头怪#2" }
+          - { floor: '3', item: "铁剑#1" }
+
+          - { floor: '3', item: "小蝙蝠#3" }
+          - { floor: '3', item: "红头怪#4" }
+          - { floor: '3', item: "小蝙蝠#4" }
+          - { floor: '3', item: "YELLOW_KEY#6" }
+          - { floor: '3', item: "YELLOW_KEY#5" }
+          - { floor: '3', item: "YELLOW_KEY#4" }
+          - { floor: '3', item: "YELLOW_DOOR#3" }
+          - { floor: '3', item: "红头怪#6" }
+          - { floor: '3', item: "红宝石#1" }
+          - { floor: '3', item: "蓝宝石#1" }
+          - { floor: '3', item: "蓝血瓶#1" }
+          - { floor: '3', item: "YELLOW_KEY#8" }
+          - { floor: '3', item: "YELLOW_KEY#7" }
+
+          - { floor: '1', item: "YELLOW_DOOR#1" }
+          - { floor: '1', item: "骷髅人#1" }
+          - { floor: '1', item: "红宝石#1" }
+          - { floor: '1', item: "红血瓶#1" }
+          - { floor: '1', item: "黄钥匙#3" }
+      "先拿宝石对、剑、红宝石":
+        steps:
+          - { floor: '3', item: "小蝙蝠#5" }
+          - { floor: '3', item: "绿头怪#2" }
+          - { floor: '3', item: "绿头怪#1" }
+          - { floor: '3', item: "小蝙蝠#3" }
+          - { floor: '3', item: "红头怪#4" }
+          - { floor: '3', item: "小蝙蝠#4" }
+          - { floor: '3', item: "YELLOW_KEY#6" }
+          - { floor: '3', item: "YELLOW_KEY#5" }
+          - { floor: '3', item: "YELLOW_KEY#4" }
+          - { floor: '3', item: "YELLOW_DOOR#3" }
+          - { floor: '3', item: "红头怪#6" }
+          - { floor: '3', item: "红宝石#1" }
+          - { floor: '3', item: "蓝宝石#1" }
+          - { floor: '3', item: "蓝血瓶#1" }
+          - { floor: '3', item: "YELLOW_KEY#8" }
+          - { floor: '3', item: "YELLOW_KEY#7" }
+
+          - { floor: '3', item: "YELLOW_DOOR#2" }
+          - { floor: '3', item: "骷髅人#1" }
+          - { floor: '3', item: "YELLOW_KEY#1" }
+          - { floor: '3', item: "YELLOW_KEY#2" }
+          - { floor: '3', item: "YELLOW_KEY#3" }
+          - { floor: '3', item: "红头怪#2" }
+          - { floor: '3', item: "铁剑#1" }
+
+          - { floor: '1', item: "YELLOW_DOOR#1" }
+          - { floor: '1', item: "骷髅人#1" }
+          - { floor: '1', item: "红宝石#1" }
+          - { floor: '1', item: "红血瓶#1" }
+          - { floor: '1', item: "黄钥匙#3" }
+      "先拿宝石对、红宝石、剑":
+        steps:
+          - { floor: '3', item: "小蝙蝠#5" }
+          - { floor: '3', item: "绿头怪#2" }
+          - { floor: '3', item: "绿头怪#1" }
+          - { floor: '3', item: "小蝙蝠#3" }
+          - { floor: '3', item: "红头怪#4" }
+          - { floor: '3', item: "小蝙蝠#4" }
+          - { floor: '3', item: "YELLOW_KEY#6" }
+          - { floor: '3', item: "YELLOW_KEY#5" }
+          - { floor: '3', item: "YELLOW_KEY#4" }
+          - { floor: '3', item: "YELLOW_DOOR#3" }
+          - { floor: '3', item: "红头怪#6" }
+          - { floor: '3', item: "红宝石#1" }
+          - { floor: '3', item: "蓝宝石#1" }
+          - { floor: '3', item: "蓝血瓶#1" }
+          - { floor: '3', item: "YELLOW_KEY#8" }
+          - { floor: '3', item: "YELLOW_KEY#7" }
+
+          - { floor: '1', item: "YELLOW_DOOR#1" }
+          - { floor: '1', item: "骷髅人#1" }
+          - { floor: '1', item: "红宝石#1" }
+          - { floor: '1', item: "红血瓶#1" }
+          - { floor: '1', item: "黄钥匙#3" }
+
+          - { floor: '3', item: "YELLOW_DOOR#2" }
+          - { floor: '3', item: "骷髅人#1" }
+          - { floor: '3', item: "YELLOW_KEY#1" }
+          - { floor: '3', item: "YELLOW_KEY#2" }
+          - { floor: '3', item: "YELLOW_KEY#3" }
+          - { floor: '3', item: "红头怪#2" }
+          - { floor: '3', item: "铁剑#1" }
