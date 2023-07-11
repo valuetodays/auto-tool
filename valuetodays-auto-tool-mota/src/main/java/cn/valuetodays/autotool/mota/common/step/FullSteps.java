@@ -2,8 +2,8 @@ package cn.valuetodays.autotool.mota.common.step;
 
 import lombok.Data;
 
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * .
@@ -17,7 +17,7 @@ public class FullSteps {
     private StepType type;
     private String floor;
     private List<Step> steps;
-    private Map<String, SimpleSteps> branchSteps;
+    private LinkedHashMap<String, SimpleSteps> branchSteps;
 
     public FullSteps() {
     }
