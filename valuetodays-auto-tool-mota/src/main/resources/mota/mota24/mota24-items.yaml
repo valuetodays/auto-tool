@@ -599,3 +599,10 @@ items:
     defend: 0
     gold: 0
     exp: 0
+  - type: "SHIELD"
+    name: "铁盾"
+    hp: 0
+    attack: 0
+    defend: 10
+    gold: 0
+    exp: 0

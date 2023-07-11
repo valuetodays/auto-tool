@@ -142,14 +142,16 @@ public class Mota24GamePlayStepSimulator {
                 log.error("no blueKeys");
                 return false;
             }
+        } else if (item.startsWith("圣光徽-怪物图鉴")) {
+            return true;
         } else if (item.equalsIgnoreCase("up")) {
             log.info("上楼");
             return true;
         } else if (item.startsWith("shop#")) {
 //            #1#gold25#atk4
             String substring = item.substring("shop#".length());
-            String goldAndAtk = substring.substring(substring.indexOf("#gold") + "#gold".length());
-            String[] arr = StringUtils.split(goldAndAtk, "#");
+            String goldAndAttr = substring.substring(substring.indexOf("#gold") + "#gold".length());
+            String[] arr = StringUtils.split(goldAndAttr, "#");
             if (arr.length != 2) {
                 log.error("商店消费配置有误");
                 return false;
@@ -177,6 +179,38 @@ public class Mota24GamePlayStepSimulator {
                 hero.dfd += Integer.parseInt(dfdString);
             }
             log.info("花费了金币{}，{}", goldString, info);
+        } else if (item.startsWith("wise#")) {
+//           wise#1#exp30#dfd5
+            String substring = item.substring("wise#".length());
+            String expAndAttr = substring.substring(substring.indexOf("#exp") + "#exp".length());
+            String[] arr = StringUtils.split(expAndAttr, "#");
+            if (arr.length != 2) {
+                log.error("智者消费配置有误");
+                return false;
+            }
+            String expString = arr[0];
+            int costExp = Integer.parseInt(expString);
+            if (hero.exp < costExp) {
+                log.error("经验不足 {}<{}", hero.exp, costExp);
+                return false;
+            }
+            hero.exp -= costExp;
+            String attrString = arr[1];
+            String info = "增加了";
+            if (StringUtils.contains(attrString, "hp")) {
+                String hpString = StringUtils.replace(arr[1], "hp", "");
+                info += (hpString + "hp");
+                hero.hp += Integer.parseInt(hpString);
+            } else if (StringUtils.contains(attrString, "atk")) {
+                String atkString = StringUtils.replace(arr[1], "atk", "");
+                info += (atkString + "攻击力");
+                hero.atk += Integer.parseInt(atkString);
+            } else if (StringUtils.contains(attrString, "dfd")) {
+                String dfdString = StringUtils.replace(arr[1], "dfd", "");
+                info += (dfdString + "防御力");
+                hero.dfd += Integer.parseInt(dfdString);
+            }
+            log.info("花费了经验{}，{}", expString, info);
         } else {
             if (!item.contains("#")) {
                 log.error("missing # in name. item={}", item);

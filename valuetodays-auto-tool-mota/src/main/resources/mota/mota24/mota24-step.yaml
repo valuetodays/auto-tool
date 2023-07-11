@@ -1000,3 +1000,54 @@ stepList:
           - { floor: "1", item: "黄钥匙#5" }
           - { floor: "1", item: "蓝钥匙#1" }
           - { floor: "1", item: "蓝宝石#1" }
+  - title: '固定路线'
+    type: 'SIMPLE'
+    floor: '5'
+    steps:
+      - { item: "小蝙蝠#2" }
+      - { item: "青头怪#2" }
+      - { floor: '3', item: "shop#1#gold25#atk4" }
+      - { item: "青头怪#1" }
+      - { item: "小蝙蝠#1" }
+      - { item: "初级法师#5" }
+      - { item: "红宝石#1" }
+      - { floor: '1', item: "黄门#4" }
+      - { floor: '1', item: "骷髅士兵#2" }
+      - { floor: '1', item: "黄钥匙#6" }
+      - { floor: '1', item: "黄钥匙#8" }
+      - { floor: '1', item: "圣光徽-怪物图鉴#1" }
+      - { floor: '3', item: "shop#1#gold25#atk4" }
+      - { item: "黄门#2" }
+      - { item: "大蝙蝠#2" }
+      - { item: "红宝石#2" }
+      - { item: "蓝宝石#2" }
+      - { item: "骷髅人#1" }
+      - { floor: '5', item: "wise#1#exp30#dfd5" }
+      - { floor: '5', item: "wise#1#exp30#dfd5" }
+      - { floor: '5', item: "wise#1#exp30#dfd5" }
+      - { floor: '5', item: "wise#1#exp30#dfd5" }
+      - { floor: '5', item: "wise#1#exp30#dfd5" }
+      - { floor: '5', item: "骷髅士兵#3" }
+      - { floor: '5', item: "骷髅士兵#4" }
+      - { floor: '1', item: "黄门#3" }
+      - { floor: '1', item: "初级法师#1" }
+      - { floor: '1', item: "绿头怪#3" }
+      - { floor: '1', item: "小蝙蝠#1" }
+      - { floor: '1', item: "青头怪#1" }
+      - { floor: '1', item: "红血瓶#5" }
+      - { floor: '1', item: "黄钥匙#4" }
+      - { floor: '1', item: "黄钥匙#2" }
+      - { floor: '3', item: "shop#1#gold25#dfd4" }
+      - { floor: '3', item: "shop#1#gold25#dfd4" }
+      - { floor: '5', item: "兽面人#1" }
+      - { floor: '5', item: "黄门#1" }
+      - { floor: '5', item: "初级法师#4" }
+      - { floor: '5', item: "初级法师#2" }
+      - { floor: '1', item: "黄钥匙#1" }
+      - { floor: '1', item: "黄钥匙#2" }
+      - { floor: '1', item: "蓝钥匙#1" }
+      - { floor: '5', item: "初级法师#1" }
+      - { floor: '5', item: "初级法师#3" }
+      - { floor: '5', item: "骷髅士兵#1" }
+      - { floor: '5', item: "骷髅士兵#2" }
+      - { floor: '5', item: "铁盾#1" }
