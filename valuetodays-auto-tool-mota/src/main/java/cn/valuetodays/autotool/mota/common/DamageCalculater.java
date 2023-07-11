@@ -23,6 +23,11 @@ public final class DamageCalculater {
         int monsterAtk = monster.getAtk();
         int monsterDef = monster.getDef();
 
+        final int fixDamage = monster.getSpecial().getFixDamage();
+        int fixDamageToUse = fixDamage;
+        if (fixDamageToUse <= 0) {
+            fixDamageToUse = 0;
+        }
         int heroDefToUse = heroDef;
         if (monster.getSpecial().isIgnoreHeroDef()) {
             heroDefToUse = 0;
@@ -52,7 +57,7 @@ public final class DamageCalculater {
         int turn = (monsterHp / hero_per_damage) + (monsterHp % hero_per_damage > 0 ? 1 : 0);
 
         // 最终伤害：初始伤害 + 怪物对勇士造成的伤害
-        int damageValue = init_damage + (turn - 1) * per_damage;
+        int damageValue = fixDamageToUse + init_damage + (turn - 1) * per_damage;
 
         Damage damageObj = new Damage();
         damageObj.setMonsterToHero(damageValue);

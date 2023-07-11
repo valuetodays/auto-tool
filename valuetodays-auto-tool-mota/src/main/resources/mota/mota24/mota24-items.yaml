@@ -231,6 +231,8 @@ items:
     defend: 70
     gold: 20
     exp: 17
+    special:
+      fixDamage: 100
   - id: 49
     type: "ENEMY"
     name: "红衣法师"

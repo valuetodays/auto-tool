@@ -109,6 +109,11 @@ public class Mota24GamePlayStepSimulator {
         String item = step.getItem();
         if (item.equalsIgnoreCase("printHero")) {
             printHero(hero);
+        } else if (item.startsWith("大钥匙#")) {
+            hero.yellowKeys++;
+            hero.blueKeys++;
+            hero.redKeys++;
+            log.info("获得大钥匙，黄绿红钥匙各得一把");
         } else if (item.startsWith("RED_KEY#") || item.startsWith("红钥匙#")) {
             hero.redKeys++;
             log.info("获得红钥匙");
@@ -227,6 +232,7 @@ public class Mota24GamePlayStepSimulator {
                 monsterFightData.setHp(mota24Item.getHp());
                 monsterFightData.setAtk(mota24Item.getAttack());
                 monsterFightData.setDef(mota24Item.getDefend());
+                monsterFightData.setSpecial(mota24Item.getSpecial());
                 Damage damage = DamageCalculater.calculateDamage(hero, monsterFightData);
                 log.info("fight, damage={}", damage);
                 if (Objects.isNull(damage)) {

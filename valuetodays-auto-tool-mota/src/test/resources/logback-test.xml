@@ -4,7 +4,8 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.PatternLayout">
-                <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{0}:%L - %msg%n</pattern>
+<!--                <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{0}:%L - %msg%n</pattern>-->
+                <pattern>%-5level - %msg%n</pattern>
             </layout>
         </encoder>
     </appender>

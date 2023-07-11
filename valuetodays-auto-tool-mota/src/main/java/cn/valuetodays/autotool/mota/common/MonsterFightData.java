@@ -33,6 +33,8 @@ public class MonsterFightData {
 
     @Data
     public static class Special {
+        // 固伤，必为先攻
+        private int fixDamage;
         // 先攻
         private boolean atkBeforeHero;
         // 忽略主角防御
