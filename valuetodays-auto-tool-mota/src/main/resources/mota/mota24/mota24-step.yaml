@@ -906,6 +906,7 @@ stepList:
       - { item: "黄钥匙#2" }
       - { item: "黄钥匙#1" }
 
+#  此处可以分支：是先获取蓝宝石，还是一直打到第七层
       - { floor: "3", item: "小蝙蝠#6" }
       - { floor: "3", item: "红头怪#7" }
       - { floor: '3', item: "shop#1#gold25#atk4" }
