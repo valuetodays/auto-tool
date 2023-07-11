@@ -30,17 +30,20 @@ public class Mota24GamePlayStepSimulatorTest {
     @Test
     public void test() {
         List<FullSteps> fullStepList = new Mota24StepLoader().loadSteps();
-        List<Steps> stepsList = fullStepList.stream().map(e -> {
-            StepType type = e.getType();
-            if (StepType.SIMPLE == type) {
-                return SimpleSteps.with(e.getSteps());
-            } else if (StepType.BRANCH == type) {
-                return BranchSteps.with(e.getBranchSteps());
-            } else {
-                log.error("unknown type=" + type);
-                return null;
-            }
-        }).filter(Objects::nonNull).collect(Collectors.toList());
+        List<Steps> stepsList = fullStepList.stream()
+            .map(e -> {
+                StepType type = e.getType();
+                if (StepType.SIMPLE == type) {
+                    return SimpleSteps.with(e.getSteps());
+                } else if (StepType.BRANCH == type) {
+                    return BranchSteps.with(e.getBranchSteps());
+                } else {
+                    log.error("unknown type=" + type);
+                    return null;
+                }
+            })
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
 
         List<Mota24Item> mota24Items = MOTA_24_ITEMS_LOADER.loadItems();
         Map<String, Mota24Item> nameAndItemMap = mota24Items.stream().collect(Collectors.toMap(Mota24Item::getName, e -> e));
