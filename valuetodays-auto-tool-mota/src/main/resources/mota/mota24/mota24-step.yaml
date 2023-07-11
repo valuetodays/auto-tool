@@ -878,3 +878,54 @@ stepList:
           - { floor: '1', item: "红宝石#1" }
           - { floor: '1', item: "红血瓶#1" }
           - { floor: '1', item: "黄钥匙#3" }
+  - title: '固定路线'
+    floor: '3'
+    type: 'SIMPLE'
+    steps:
+      - { item: "小蝙蝠#1" }
+      - { item: "红头怪#3" }
+      - { item: "小蝙蝠#2" }
+      - { item: "红头怪#5" }
+      - { item: "红头怪#2" }
+      - { item: "up" }
+  - title: '固定路线'
+    floor: '4'
+    type: 'SIMPLE'
+    steps:
+      - { item: "红头怪#2" }
+      - { floor: '3', item: "shop#1#gold25#atk4" }
+      - { item: "小蝙蝠#4" }
+      - { item: "小蝙蝠#2" }
+      - { item: "黄门#4" }
+      - { item: "青头怪#2" }
+      - { item: "黄门#3" }
+      - { item: "骷髅人#2" }
+      - { item: "红血瓶#2" }
+      - { item: "红血瓶#4" }
+      - { item: "青头怪#4" }
+      - { item: "黄钥匙#2" }
+      - { item: "黄钥匙#1" }
+
+      - { floor: "3", item: "小蝙蝠#6" }
+      - { floor: "3", item: "红头怪#7" }
+      - { floor: '3', item: "shop#1#gold25#atk4" }
+      - { floor: "1", item: "骷髅人#2" }
+      - { floor: "1", item: "黄门#2" }
+      - { floor: "1", item: "骷髅士兵#1" }
+      - { floor: "1", item: "黄钥匙#5" }
+      - { floor: "1", item: "蓝钥匙#1" }
+      - { floor: "1", item: "蓝宝石#1" }
+      - { item: "printHero" }
+
+      - { item: "青头怪#3" }
+      - { item: "红血瓶#3" }
+      - { item: "红血瓶#1" }
+      - { item: "骷髅人#1" }
+      - { item: "黄门#2" }
+      - { item: "青头怪#1" }
+      - { floor: '3', item: "shop#1#gold25#atk4" }
+      - { item: "黄门#1" }
+      - { item: "小蝙蝠#1" }
+      - { item: "小蝙蝠#3" }
+      - { item: "红头怪#1" }
+      - { item: "up" }

@@ -7,9 +7,11 @@ import cn.valuetodays.autotool.mota.common.item.Mota24ItemsLoader;
 import cn.valuetodays.autotool.mota.common.step.BranchSteps;
 import cn.valuetodays.autotool.mota.common.step.FullSteps;
 import cn.valuetodays.autotool.mota.common.step.SimpleSteps;
+import cn.valuetodays.autotool.mota.common.step.Step;
 import cn.valuetodays.autotool.mota.common.step.StepType;
 import cn.valuetodays.autotool.mota.common.step.Steps;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -34,7 +36,14 @@ public class Mota24GamePlayStepSimulatorTest {
             .map(e -> {
                 StepType type = e.getType();
                 if (StepType.SIMPLE == type) {
-                    return SimpleSteps.with(e.getSteps());
+                    List<Step> steps = e.getSteps();
+                    steps.forEach(s -> {
+                        String floor = s.getFloor();
+                        if (StringUtils.isBlank(floor)) {
+                            s.setFloor(e.getFloor());
+                        }
+                    });
+                    return SimpleSteps.with(steps);
                 } else if (StepType.BRANCH == type) {
                     return BranchSteps.with(e.getBranchSteps());
                 } else {
@@ -50,6 +59,7 @@ public class Mota24GamePlayStepSimulatorTest {
         Hero hero = new Hero();
         Mota24GamePlayStepSimulator mota24GamePlayStepSimulator = new Mota24GamePlayStepSimulator();
         mota24GamePlayStepSimulator.simulate(hero, stepsList, nameAndItemMap);
+        mota24GamePlayStepSimulator.printHero(hero);
     }
 
 }

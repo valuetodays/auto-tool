@@ -33,10 +33,20 @@ public class Mota24GamePlayStepSimulator {
         printHero(hero);
     }
 
-    private void printHero(Hero hero) {
+    public void printHero(Hero hero) {
         log.info("hero: {}", hero);
     }
 
+    private void copyToHero(Hero hero, Hero tmpHero) {
+        hero.hp = tmpHero.hp;
+        hero.atk = tmpHero.atk;
+        hero.dfd = tmpHero.dfd;
+        hero.gold = tmpHero.gold;
+        hero.exp = tmpHero.exp;
+        hero.yellowKeys = tmpHero.yellowKeys;
+        hero.blueKeys = tmpHero.blueKeys;
+        hero.redKeys = tmpHero.redKeys;
+    }
 
     private boolean meetItems(Steps steps, Hero hero, Map<String, Mota24Item> nameAndItemMap) {
         if (steps instanceof BranchSteps) {
@@ -88,15 +98,21 @@ public class Mota24GamePlayStepSimulator {
         for (Map.Entry<String, Pair<Boolean, Hero>> stringPairEntry : sortedList) {
             log.info(" -> {}", stringPairEntry);
         }
+        Map.Entry<String, Pair<Boolean, Hero>> last = sortedList.get(sortedList.size() - 1);
+        Hero bestBranchForHero = last.getValue().getValue();
+        copyToHero(hero, bestBranchForHero);
         return true;
     }
 
+
     private boolean meetItem(Step step, Hero hero, Map<String, Mota24Item> nameAndItemMap) {
         String item = step.getItem();
-        if (item.startsWith("RED_KEY#") || item.startsWith("红钥匙#")) {
+        if (item.equalsIgnoreCase("printHero")) {
+            printHero(hero);
+        } else if (item.startsWith("RED_KEY#") || item.startsWith("红钥匙#")) {
             hero.redKeys++;
             log.info("获得红钥匙");
-        } else if (item.startsWith("RED_DOOR#")) {
+        } else if (item.startsWith("RED_DOOR#") || item.startsWith("红门#")) {
             if (hero.redKeys > 0) {
                 hero.redKeys--;
                 log.info("使用红钥匙开红门");
@@ -107,7 +123,7 @@ public class Mota24GamePlayStepSimulator {
         } else if (item.startsWith("YELLOW_KEY#") || item.startsWith("黄钥匙#")) {
             hero.yellowKeys++;
             log.info("获得黄钥匙");
-        } else if (item.startsWith("YELLOW_DOOR#")) {
+        } else if (item.startsWith("YELLOW_DOOR#") || item.startsWith("黄门#")) {
             if (hero.yellowKeys > 0) {
                 hero.yellowKeys--;
                 log.info("使用黄钥匙开黄门");
@@ -118,7 +134,7 @@ public class Mota24GamePlayStepSimulator {
         } else if (item.startsWith("BLUE_KEY#") || item.startsWith("蓝钥匙#")) {
             hero.blueKeys++;
             log.info("获得蓝钥匙");
-        } else if (item.startsWith("BLUE_DOOR#")) {
+        } else if (item.startsWith("BLUE_DOOR#") || item.startsWith("蓝门#")) {
             if (hero.blueKeys > 0) {
                 hero.blueKeys--;
                 log.info("使用蓝钥匙开蓝门");
