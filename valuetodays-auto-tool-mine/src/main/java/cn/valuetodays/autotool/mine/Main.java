@@ -1,5 +1,7 @@
 package cn.valuetodays.autotool.mine;
 
+import cn.valuetodays.autotool.mine.impl.ClassicMine;
+
 import java.io.IOException;
 
 /**
@@ -10,7 +12,8 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        AutoClickMine autoClickMine = new AutoClickMine();
+        IMine delegate = new ClassicMine();
+        AutoClickMine autoClickMine = new AutoClickMine(delegate);
         autoClickMine.doAutoClick();
     }
 }

@@ -4,15 +4,21 @@ import cn.valuetodays.autotool.common.win32.ScreenUtils;
 import cn.valuetodays.autotool.common.win32.Win32Utils;
 import com.sun.jna.platform.win32.WinDef;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.tuple.Triple;
+import org.apache.commons.lang3.StringUtils;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * .
@@ -28,50 +34,13 @@ public class AutoClickMine {
     private int verticalTileNum;
     private int horizonTileNum;
 
-    private static final int tileWidth = 24;
-    private static final int tileHeight = 24;
-    private static final int leftOffsetToFirstTile = 18;
-    private static final int topOffsetToFirstTile = 82;
-    private static final int rightOffsetToLastTile = 12;
-    private static final int bottomOffsetToLastTile = 12;
+    private final IMine delegate;
 
-    private boolean is1(int rgb) {
-        Color color = new Color(rgb, false);
-        int red = color.getRed();
-        int green = color.getGreen();
-        int blue = color.getBlue();
-        return green < 30 && red < 35 && (blue > 235);
-    }
-
-    private boolean is2(int rgb) {
-        Color color = new Color(rgb, false);
-        int red = color.getRed();
-        int green = color.getGreen();
-        int blue = color.getBlue();
-        return (green > 115 && green < 130) && red < 10 && (blue<17);
-    }
-
-    private boolean is3(int rgb) {
-        Color color = new Color(rgb, false);
-        int red = color.getRed();
-        int green = color.getGreen();
-        int blue = color.getBlue();
-        return (red > 215) && green < 15 && (blue<30);
-    }
-
-    public int getValue(int rgb) {
-        if (rgb == new Color(192, 192, 192).getRGB()) {
-            return -1; // unknown
+    public AutoClickMine(IMine mine) {
+        if (Objects.isNull(mine)) {
+            throw new NullPointerException("should not be null");
         }
-        if (is1(rgb)) {
-            return 1;
-        } else if (is2(rgb)) {
-            return 2;
-        } else if (is3(rgb)) {
-            return 3;
-        }
-        System.err.println("unknown rgb=" + rgb);
-        return -100;
+        this.delegate = mine;
     }
 
     /**
@@ -80,10 +49,10 @@ public class AutoClickMine {
     public void doAutoClick() throws IOException {
         System.out.println("doAutoClick() begin");
 
-        String windowTitle = ("扫雷");
-        hwnd = Win32Utils.getHwnd(windowTitle);
+        String withTitle = delegate.getWithTitle();
+        hwnd = Win32Utils.getHwnd(withTitle);
         if (Objects.isNull(hwnd)) {
-            System.out.println("程序未运行");
+            System.out.println("程序未运行：" + withTitle);
             return;
         }
 
@@ -118,10 +87,10 @@ public class AutoClickMine {
         Rectangle rectangle = clientRect.toRectangle();
         int clientWidth = rectangle.width;
         int clientHeight = rectangle.height;
-        int totalTilesHeight = clientHeight - topOffsetToFirstTile - bottomOffsetToLastTile;
-        int totalTilesWidth = clientWidth - leftOffsetToFirstTile - rightOffsetToLastTile;
-        verticalTileNum = totalTilesWidth / tileWidth;
-        horizonTileNum = totalTilesHeight / tileHeight;
+        int totalTilesHeight = delegate.calculateTotalTilesHeight(clientHeight);
+        int totalTilesWidth = delegate.calculateTotalTilesWidth(clientWidth);
+        verticalTileNum = delegate.calculateVerticalTileNum(totalTilesWidth);
+        horizonTileNum = delegate.calculateHorizontalTileNum(totalTilesHeight);
         System.out.println("tileXNum=" + verticalTileNum + ", tileYNum=" + horizonTileNum);
 
         tileMap = new IntTile[verticalTileNum][horizonTileNum];
@@ -129,59 +98,9 @@ public class AutoClickMine {
             Arrays.fill(intTiles, IntTile.UNKNOWN);
         }
 
-//
-
         forceSaveClientAsImage();
-
-/*
-        Map<Integer, Integer> intIntMap = new HashMap<>();
-        intIntMap.put(-194809, 3);
-        intIntMap.put(-324339, 3);
-        final int center = 999;
-        Map<Integer, List<Triple<Integer, Integer, Integer>>> valueAndPosWithRGBMap = new HashMap<>();
-        // 还未点击
-        valueAndPosWithRGBMap.put(-1,
-            Collections.singletonList(
-                Triple.of(0, 0, Color.WHITE.getRGB())
-            )
-        );
-        // 0
-        valueAndPosWithRGBMap.put(0,
-            Collections.singletonList(
-                Triple.of(center, center, -4144960)
-            )
-        );
-        // 1
-        valueAndPosWithRGBMap.put(1,
-            Collections.singletonList(
-                Triple.of(center, center, -16776961)
-            )
-        );
-        // 2
-        valueAndPosWithRGBMap.put(2,
-            Collections.singletonList(
-                Triple.of(center, center, -16744448)
-            )
-        );
-        // 3
-        valueAndPosWithRGBMap.put(3,
-            Collections.singletonList(
-                Triple.of(center, center, -194809)
-            )
-        );
-*/
         reloadTileMap();
 
-/*
-        HashSet<String> distinctImageIdList = new HashSet<>(imageIdList);
-        int tileCount = mode.getHorizontalTileCount() * mode.getVerticalTileCount(); // 图块数量
-        int exceptedTileCategoryCount = tileCount / mode.getTileCountPerCategory(); // 图块种类类数量
-        System.out.println("!! distinct: " + distinctImageIdList.size() + ", total: " + imageIdList.size());
-        if (exceptedTileCategoryCount != distinctImageIdList.size()) {
-            System.err.println("解析tile图片失败，有误识别的图片，建议重新开始一局。");
-        }
-
- */
         printTileMap();
 
         Point p = new Point(1, 1);
@@ -218,10 +137,7 @@ public class AutoClickMine {
                 if (!previousState.isUnknown()) {
                     continue;
                 }
-                BufferedImage subimage = clientAsImage.getSubimage(
-                    leftOffsetToFirstTile + i * tileWidth + 3, topOffsetToFirstTile + j * tileHeight + 3,
-                    tileWidth - 4, tileHeight - 4
-                );
+                BufferedImage subimage = delegate.getSubimage(clientAsImage, i, j);
                 try (ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
                     ScreenUtils.saveScreenshotToJpgFile(subimage, baos);
                     String md5Hex = DigestUtils.md5Hex(baos.toByteArray());
@@ -234,7 +150,7 @@ public class AutoClickMine {
                     if (Objects.nonNull(tmpScannedValue)) {
                         scannedValue = tmpScannedValue;
                     } else {
-                        scannedValue = getValue(subimage.getRGB(10, 3));
+                        scannedValue = delegate.getValue(subimage.getRGB(10, 3));
                     }
                     tileMap[i][j] = IntTile.of(scannedValue);
 //                    System.out.println(i + "_" + j + "scannedValue=" + scannedValue);
@@ -254,10 +170,10 @@ public class AutoClickMine {
      * 尝试点击图块
      */
     private void tryClickTile(int tileX, int tileY) {
-        IntTile toClick = readTile(tileX, tileY);
-        if (!toClick.isUnknown()) {
-            return;
-        }
+//        IntTile toClick = readTile(tileX, tileY);
+//        if (!toClick.isUnknown()) {
+//            return;
+//        }
         int left = tileX - 1;
         int right = tileX + 1;
         int top = tileY - 1;
@@ -310,6 +226,7 @@ public class AutoClickMine {
         int mineTiles = (int)tilesAround.stream()
             .filter(e -> readTile(e.x, e.y).isMine())
             .count();
+        // 周围的雷都已经确定了，就把周围不是雷的点击了
         if (mineCount == mineTiles) {
             System.out.println("found all mines=" + mineCount);
             tilesAround.stream()
@@ -325,6 +242,7 @@ public class AutoClickMine {
             int unknownTiles = (int)tilesAround.stream()
                 .filter(e -> readTile(e.x, e.y).isUnknown())
                 .count();
+            // 周围的雷都已经确定了，就把周围是雷的标记一下
             if (mineCount == unknownTiles + mineTiles) {
                 System.out.println("found mines=" + mineCount);
                 tilesAround.stream()
@@ -346,12 +264,49 @@ public class AutoClickMine {
      */
     private void autoClick() {
         reloadTileMap();
+        List<Point> points = new ArrayList<>();
         for (int point1x = 0; point1x < tileMap.length; point1x++) {
             for (int point1y = 0; point1y < tileMap[0].length; point1y++) {
-                tryClickTile(point1x, point1y);
-                reloadTileMap();
+                IntTile tile = readTile(point1x, point1y);
+                Integer value = tile.getValue();
+                if (value > 0 && value < 9 && hasUnknownBorder(tile, point1x, point1y)) {
+                    points.add(new Point(point1x, point1y));
+                }
             }
         }
+        System.out.println("try points=" + StringUtils.join(points, ", "));
+        for (Point point : points) {
+            reloadTileMap();
+            tryClickTile(point.x, point.y);
+        }
+    }
+
+    /**
+     * 周围有未点击/未标记的图块
+     * @param x x
+     * @param y x
+     * @return 是/否
+     */
+    private boolean hasUnknownBorder(IntTile tile, int x, int y) {
+        int left = x - 1;
+        int right = x + 1;
+        int top = y - 1;
+        int bottom = y + 1;
+
+        return Stream.of(
+            readNullableTile(left, top),
+            readNullableTile(x, top),
+            readNullableTile(right, top),
+
+            readNullableTile(left, y),
+            readNullableTile(right, y),
+
+            readNullableTile(left, bottom),
+            readNullableTile(x, bottom),
+            readNullableTile(right, bottom)
+        )
+        .filter(Objects::nonNull)
+        .anyMatch(IntTile::isUnknown);
     }
 
     /**
@@ -360,6 +315,14 @@ public class AutoClickMine {
      */
     private IntTile readTile(int x, int y) {
         return tileMap[x][y];
+    }
+
+    private IntTile readNullableTile(int x, int y) {
+        if (isInTileMap(x, y)) {
+            return tileMap[x][y];
+        } else {
+            return null;
+        }
     }
 
 
@@ -388,9 +351,8 @@ public class AutoClickMine {
             return;
         }
         System.out.println("try click tile(x,y)=" + tileX + "," + tileY);
-        int x = leftOffsetToFirstTile + tileX * tileWidth + tileWidth / 2;
-        int y = topOffsetToFirstTile + tileY * tileHeight + tileHeight / 2;
-        Win32Utils.clickWindow(hwnd, x, y);
+        Point p = delegate.calculateCenterPosition(tileX, tileY);
+        Win32Utils.clickWindow(hwnd, p.x, p.y);
         reloadTileMap();
         tryClickTile(tileX, tileY);
     }
@@ -402,9 +364,8 @@ public class AutoClickMine {
     private void markTileAsMine(int tileX, int tileY) {
         readTile(tileX, tileY).setAsMine();
         System.out.println("mark tile(x,y)=" + tileX + "," + tileY);
-        int x = leftOffsetToFirstTile + tileX * tileWidth + tileWidth / 2;
-        int y = topOffsetToFirstTile + tileY * tileHeight + tileHeight / 2;
-        Win32Utils.rightClickWindow(hwnd, x, y);
+        Point p = delegate.calculateCenterPosition(tileX, tileY);
+        Win32Utils.rightClickWindow(hwnd, p.x, p.y);
         reloadTileMap();
         tryClickTile(tileX, tileY);
     }
