@@ -67,12 +67,12 @@ public final class Win32Utils {
 
     public static synchronized void SendKeyDownToWindow(HWND hwnd, int vk) {
         WinDef.WPARAM wParam = new WinDef.WPARAM(vk);
-        WinDef.LPARAM lParam = Win32Const.LPARAM_ZERO;
+        LPARAM lParam = Win32Const.LPARAM_ZERO;
         USER_32.PostMessage(hwnd, WinUser.WM_KEYDOWN, wParam, lParam);
     }
     public static synchronized void SendKeyUpToWindow(HWND hwnd, int vk) {
         WinDef.WPARAM wParam = new WinDef.WPARAM(vk);
-        WinDef.LPARAM lParam = Win32Const.LPARAM_ZERO;
+        LPARAM lParam = Win32Const.LPARAM_ZERO;
         USER_32.PostMessage(hwnd, WinUser.WM_KEYUP, wParam, lParam);
     }
 
@@ -81,13 +81,26 @@ public final class Win32Utils {
      * @param hwnd hwnd
      */
     public static synchronized void clickWindow(HWND hwnd, int xPos, int yPos) {
-        WinDef.DWORD dword = Win32Utils.makeDwordFromPosition(xPos, yPos);
+        DWORD dword = Win32Utils.makeDwordFromPosition(xPos, yPos);
         // 鼠标左键按下
-        USER_32.SendMessage(hwnd, Win32Const.WM_LBUTTONDOWN, Win32Const.WPARAM_MK_LBUTTON, new WinDef.LPARAM(dword.longValue()));
+        USER_32.SendMessage(hwnd, Win32Const.WM_LBUTTONDOWN, Win32Const.WPARAM_MK_LBUTTON, new LPARAM(dword.longValue()));
         sleep(20);
         // 鼠标左键抬起
 //        USER_32.SendMessage(hwnd, Win32Const.WM_LBUTTONUP, Win32Const.WPARAM_MK_LBUTTON, new WinDef.LPARAM(dword.longValue()));
-        USER_32.SendMessage(hwnd, Win32Const.WM_LBUTTONUP, Win32Const.WPARAM_ZERO, new WinDef.LPARAM(dword.longValue()));
+        USER_32.SendMessage(hwnd, Win32Const.WM_LBUTTONUP, Win32Const.WPARAM_ZERO, new LPARAM(dword.longValue()));
+    }
+
+    /**
+     * 传入控件所在对话框中的x,y可以触发点击操作
+     * @param hwnd hwnd
+     */
+    public static synchronized void rightClickWindow(HWND hwnd, int xPos, int yPos) {
+        DWORD dword = Win32Utils.makeDwordFromPosition(xPos, yPos);
+        // 鼠标右键按下
+        USER_32.SendMessage(hwnd, Win32Const.WM_RBUTTONDOWN, Win32Const.WPARAM_MK_RBUTTON, new LPARAM(dword.longValue()));
+        sleep(20);
+        // 鼠标右键抬起
+        USER_32.SendMessage(hwnd, Win32Const.WM_RBUTTONUP, Win32Const.WPARAM_ZERO, new LPARAM(dword.longValue()));
     }
 
     /**
@@ -111,26 +124,26 @@ public final class Win32Utils {
      */
     public static synchronized void SendKeyToActiveWindow(int vk) {
         WinUser.INPUT input = new WinUser.INPUT();
-        input.type = new WinDef.DWORD(WinUser.INPUT.INPUT_KEYBOARD);
+        input.type = new DWORD(WinUser.INPUT.INPUT_KEYBOARD);
         // Because setting INPUT_INPUT_KEYBOARD is not enough: https://groups.google.com/d/msg/jna-users/NDBGwC1VZbU/cjYCQ1CjBwAJ
         input.input.setType("ki");
         input.input.ki.wScan = new WinDef.WORD(0);
-        input.input.ki.time = new WinDef.DWORD(0);
+        input.input.ki.time = new DWORD(0);
         input.input.ki.dwExtraInfo = new BaseTSD.ULONG_PTR(0);
 
         // Press
         input.input.ki.wVk = new WinDef.WORD((vk));
-        input.input.ki.dwFlags = new WinDef.DWORD(0);  // keydown
+        input.input.ki.dwFlags = new DWORD(0);  // keydown
 
-        User32.INSTANCE.SendInput(new WinDef.DWORD(1), (WinUser.INPUT[]) input.toArray(1), input.size());
+        User32.INSTANCE.SendInput(new DWORD(1), (WinUser.INPUT[]) input.toArray(1), input.size());
 
         sleep(300);
 
         // Release
         input.input.ki.wVk = new WinDef.WORD((vk));
-        input.input.ki.dwFlags = new WinDef.DWORD(WinUser.KEYBDINPUT.KEYEVENTF_KEYUP);  // keyup
+        input.input.ki.dwFlags = new DWORD(WinUser.KEYBDINPUT.KEYEVENTF_KEYUP);  // keyup
 
-        User32.INSTANCE.SendInput(new WinDef.DWORD(1), (WinUser.INPUT[]) input.toArray(1), input.size());
+        User32.INSTANCE.SendInput(new DWORD(1), (WinUser.INPUT[]) input.toArray(1), input.size());
     }
 
     /**
@@ -278,6 +291,13 @@ public final class Win32Utils {
         return MAKEDWORD(y, x);
     }
 
-
+    /**
+     * 根据窗口标题获取窗口对象（窗口句柄）
+     * @param windowTitle 窗口标题
+     * @return 窗口对象（窗口句柄）
+     */
+    public static HWND getHwnd(String windowTitle) {
+        return Win32Utils.USER_32.FindWindow(null, windowTitle);
+    }
 
 }

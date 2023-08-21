@@ -22,6 +22,7 @@
         <module>valuetodays-auto-tool-common</module>
         <module>valuetodays-auto-tool-llk</module>
         <module>valuetodays-auto-tool-mota</module>
+        <module>valuetodays-auto-tool-mine</module>
     </modules>
 
     <dependencies>

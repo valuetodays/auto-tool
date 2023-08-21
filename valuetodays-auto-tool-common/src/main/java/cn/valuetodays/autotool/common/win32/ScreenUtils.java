@@ -41,6 +41,9 @@ public final class ScreenUtils {
     public static BufferedImage getScreenshotOfWindow(WinDef.HWND hWnd) {
         return getScreenshotOfWindow(hWnd, true);
     }
+    public static BufferedImage getScreenshotOfWindowClient(WinDef.HWND hWnd) {
+        return getScreenshotOfWindow(hWnd, false);
+    }
 
     /**
      *

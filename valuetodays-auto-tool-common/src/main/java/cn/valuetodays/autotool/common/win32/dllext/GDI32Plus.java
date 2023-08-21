@@ -17,16 +17,16 @@ import com.sun.jna.win32.W32APIOptions;
 public interface GDI32Plus extends StdCallLibrary, WinUser, WinNT {
     GDI32Plus INSTANCE = Native.load("gdi32", GDI32Plus.class, W32APIOptions.DEFAULT_OPTIONS);
 
-    boolean BitBlt(WinDef.HDC hdcDest, int nXDest, int nYDest, int nWidth,
-                   int nHeight, WinDef.HDC hdcSrc, int nXSrc, int nYSrc, int dwRop);
+    boolean BitBlt(HDC hdcDest, int nXDest, int nYDest, int nWidth,
+                   int nHeight, HDC hdcSrc, int nXSrc, int nYSrc, int dwRop);
 
-    boolean GetDIBits(WinDef.HDC dc, WinDef.HBITMAP bmp, int startScan, int scanLines,
+    boolean GetDIBits(HDC dc, HBITMAP bmp, int startScan, int scanLines,
                       byte[] pixels, WinGDI.BITMAPINFO bi, int usage);
 
-    boolean GetDIBits(WinDef.HDC dc, WinDef.HBITMAP bmp, int startScan, int scanLines,
+    boolean GetDIBits(HDC dc, HBITMAP bmp, int startScan, int scanLines,
                       short[] pixels, WinGDI.BITMAPINFO bi, int usage);
 
-    boolean GetDIBits(WinDef.HDC dc, WinDef.HBITMAP bmp, int startScan, int scanLines,
+    boolean GetDIBits(HDC dc, HBITMAP bmp, int startScan, int scanLines,
                       int[] pixels, WinGDI.BITMAPINFO bi, int usage);
 
     int SRCCOPY = 0xCC0020;

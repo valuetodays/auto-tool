@@ -23,12 +23,12 @@ public interface Comctl32Plus extends StdCallLibrary, WinUser, WinNT {
 //    #define TVM_GETCOUNT            (TV_FIRST + 5)
 //#define TreeView_GetCount(hwnd)  (UINT)SNDMSG((hwnd), TVM_GETCOUNT, 0, 0)
     default int TreeView_GetCount(HWND hwnd) {
-        WinDef.LRESULT lr = Win32Utils.USER_32.SendMessage(hwnd, Win32Const.TVM_GETCOUNT, null, null);
+        LRESULT lr = Win32Utils.USER_32.SendMessage(hwnd, Win32Const.TVM_GETCOUNT, null, null);
         return lr.intValue();
     }
 
     default DWORD TreeView_GetNextItem(HWND hwnd, DWORD hitem, int code) {
-        WinDef.LRESULT lr = Win32Utils.USER_32.SendMessage(hwnd, Win32Const.TVM_GETNEXTITEM, new WPARAM(code), new LPARAM(hitem.longValue()));
+        LRESULT lr = Win32Utils.USER_32.SendMessage(hwnd, Win32Const.TVM_GETNEXTITEM, new WPARAM(code), new LPARAM(hitem.longValue()));
         return new DWORD(lr.longValue());
     }
 
@@ -41,7 +41,7 @@ public interface Comctl32Plus extends StdCallLibrary, WinUser, WinNT {
     }
 
     default BOOL TreeView_Select(HWND hwnd, DWORD hitem, int code) {
-        WinDef.LRESULT lr = Win32Utils.USER_32.SendMessage(hwnd, Win32Const.TVM_SELECTITEM, new WPARAM(code), new LPARAM(hitem.longValue()));
+        LRESULT lr = Win32Utils.USER_32.SendMessage(hwnd, Win32Const.TVM_SELECTITEM, new WPARAM(code), new LPARAM(hitem.longValue()));
         return new BOOL(lr.intValue());
     }
 
@@ -75,7 +75,7 @@ public interface Comctl32Plus extends StdCallLibrary, WinUser, WinNT {
 
 
     default BOOL TreeView_GetItem(HWND hwnd, Win32Struct.TVITEM pitem) {
-        WinDef.LRESULT lr = Win32Utils.USER_32.SendMessage(hwnd, Win32Const.TVM_GETITEM, null, new LPARAM(pitem.getPointer().getLong(0)));
+        LRESULT lr = Win32Utils.USER_32.SendMessage(hwnd, Win32Const.TVM_GETITEM, null, new LPARAM(pitem.getPointer().getLong(0)));
         return new BOOL(lr.intValue());
     }
 

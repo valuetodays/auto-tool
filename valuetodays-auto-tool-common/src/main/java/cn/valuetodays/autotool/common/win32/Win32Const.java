@@ -14,6 +14,7 @@ import static com.sun.jna.platform.win32.WinUser.WM_USER;
 public class Win32Const {
 
     public static final WPARAM WPARAM_MK_LBUTTON = new WPARAM(Win32Const.MK_LBUTTON);
+    public static final WPARAM WPARAM_MK_RBUTTON = new WPARAM(Win32Const.MK_RBUTTON);
     public static final WPARAM WPARAM_ZERO = new WPARAM(0);
     public static final LPARAM LPARAM_ZERO = new LPARAM(0);
 

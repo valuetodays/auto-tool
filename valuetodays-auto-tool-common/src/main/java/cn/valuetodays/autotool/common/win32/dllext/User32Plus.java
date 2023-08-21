@@ -67,11 +67,11 @@ public interface User32Plus extends StdCallLibrary, WinUser, WinNT {
      * @param nIDDlgItem nIDDlgItem
      */
     default String GetTextInEditCtrl(HWND hdlg, int nIDDlgItem) {
-        WinDef.HWND hwndEdit = Win32Utils.USER_32_PLUS.GetDlgItem(hdlg, nIDDlgItem);
+        HWND hwndEdit = Win32Utils.USER_32_PLUS.GetDlgItem(hdlg, nIDDlgItem);
 
         int n = 1024;
         Pointer pointer = Win32Utils.stringToPointer2(new String(new char[n]));
-        LPARAM lparamForText = new WinDef.LPARAM(Win32Utils.toNativeValue(pointer));
+        LPARAM lparamForText = new LPARAM(Win32Utils.toNativeValue(pointer));
         Win32Utils.USER_32.SendMessage(hwndEdit, Win32Const.WM_GETTEXT, new WPARAM(n), lparamForText);
         return pointer.getWideString(0);
     }

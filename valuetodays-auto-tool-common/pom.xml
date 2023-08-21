@@ -20,6 +20,19 @@
             <artifactId>jna-platform</artifactId>
             <version>${jna.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
+        <!-- 下载地址
+             https://tesseract-ocr.github.io/tessdoc/#binaries
+             "older versions for 32 and 64 bit Windows"  in https://github.com/UB-Mannheim/tesseract/wiki
+        -->
+        <!-- 程序所用版本：tesseract-ocr-w64-setup-v5.3.0.20221214.exe
+        需要安装 vc++2015 runtime （下载地址：https://www.cr173.com/soft/76413.html）
+        -->
+        <dependency>
+            <groupId>net.sourceforge.tess4j</groupId>
+            <artifactId>tess4j</artifactId>
+            <version>5.3.0</version>
+        </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>

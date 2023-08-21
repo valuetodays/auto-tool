@@ -43,7 +43,7 @@ public final class JsonUtils {
         timeModule.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
         MAPPER.registerModule(timeModule);
         MAPPER.setSerializationInclusion(Include.NON_NULL);
-        MAPPER.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL);
+        MAPPER.setDefaultPropertyInclusion(Include.NON_NULL);
         MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         MAPPER.registerModule(new Jdk8Module());
