@@ -13,7 +13,6 @@ public abstract class BaseTile<T> {
     protected T value;
 
     public abstract boolean isMine();
-    public abstract void setAsMine();
 
     public final T getValue() {
         return value;

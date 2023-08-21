@@ -24,6 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -95,6 +96,9 @@ public final class Win32Utils {
      * @param hwnd hwnd
      */
     public static synchronized void rightClickWindow(HWND hwnd, int xPos, int yPos) {
+        if (Objects.isNull(hwnd)) {
+            return;
+        }
         DWORD dword = Win32Utils.makeDwordFromPosition(xPos, yPos);
         // 鼠标右键按下
         USER_32.SendMessage(hwnd, Win32Const.WM_RBUTTONDOWN, Win32Const.WPARAM_MK_RBUTTON, new LPARAM(dword.longValue()));

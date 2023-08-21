@@ -6,7 +6,9 @@ import lombok.EqualsAndHashCode;
 import java.util.Objects;
 
 /**
- * 图块中保存的是数字
+ * 图块中保存的是数字.
+ *
+ *   IntTile应该是不可变对象
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -29,16 +31,15 @@ public class IntTile extends BaseTile<Integer> {
     }
 
     @Override
-    public void setAsMine() {
-        value = MINE.value;
-    }
-
-    @Override
     public boolean isUnknown() {
         return Objects.equals(value, UNKNOWN.value);
     }
     public boolean isZero() {
         return Objects.equals(value, ZERO.value);
+    }
+
+    public boolean isNumber() {
+        return value > 0 && value < 9;
     }
 
 }

@@ -3,7 +3,9 @@ package cn.valuetodays.autotool.mine;
 import cn.valuetodays.autotool.common.win32.ScreenUtils;
 import cn.valuetodays.autotool.common.win32.Win32Utils;
 import com.sun.jna.platform.win32.WinDef;
+import lombok.Data;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.awt.Point;
@@ -14,10 +16,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -34,6 +38,7 @@ public class AutoClickMine {
     private int verticalTileNum;
     private int horizonTileNum;
 
+    private final ClickLogic clickLogic;
     private final IMine delegate;
 
     public AutoClickMine(IMine mine) {
@@ -41,6 +46,23 @@ public class AutoClickMine {
             throw new NullPointerException("should not be null");
         }
         this.delegate = mine;
+        clickLogic = new ClickLogic(this);
+    }
+
+    public ClickLogic getClickLogic() {
+        return clickLogic;
+    }
+
+    public void setTileMap(IntTile[][] tileMap) {
+        this.tileMap = tileMap;
+    }
+
+    public void setVerticalTileNum(int verticalTileNum) {
+        this.verticalTileNum = verticalTileNum;
+    }
+
+    public void setHorizonTileNum(int horizonTileNum) {
+        this.horizonTileNum = horizonTileNum;
     }
 
     /**
@@ -202,6 +224,15 @@ public class AutoClickMine {
     }
 
     private void guessAroundTile(int tileX, int tileY) {
+        calculateAroundTile(tileX, tileY);
+    }
+
+
+
+    /**
+     * 根据周围图块计算
+     */
+    private void calculateAroundTile(int tileX, int tileY) {
         if (!isInTileMap(tileX, tileY)) {
             return;
         }
@@ -212,6 +243,7 @@ public class AutoClickMine {
         }
         Integer mineCount = tile.getValue();
 
+//        List<Point> points = borderPoints(tileX, tileY, false);
         List<Point> tilesAround = new ArrayList<>(8);
         for (int i = tileX - 1; i <= tileX + 1; i++) {
             for (int j = tileY - 1; j <= tileY + 1 ; j++) {
@@ -254,6 +286,10 @@ public class AutoClickMine {
                         System.out.println(msg);
                         markTileAsMine(e.x, e.y);
                     });
+            } else {
+                if (mineCount > mineTiles && unknownTiles > 1) {
+                    logicByAroundTile(tileX, tileY);
+                }
             }
         }
 
@@ -269,7 +305,7 @@ public class AutoClickMine {
             for (int point1y = 0; point1y < tileMap[0].length; point1y++) {
                 IntTile tile = readTile(point1x, point1y);
                 Integer value = tile.getValue();
-                if (value > 0 && value < 9 && hasUnknownBorder(tile, point1x, point1y)) {
+                if (value > 0 && value < 9 && hasUnknownBorder(point1x, point1y)) {
                     points.add(new Point(point1x, point1y));
                 }
             }
@@ -278,43 +314,148 @@ public class AutoClickMine {
         for (Point point : points) {
             reloadTileMap();
             tryClickTile(point.x, point.y);
+//            reloadTileMap();
+//            logicByAroundTile(point.x, point.y);
+        }
+        /*
+        List<List<Point>> crossBorderPointsList = new ArrayList<>();
+        for (int point1x = 0; point1x < tileMap.length; point1x++) {
+            for (int point1y = 0; point1y < tileMap[0].length; point1y++) {
+                IntTile tile = readTile(point1x, point1y);
+                if (tile.isUnknown()) {
+                    List<Point> crossBorderPoints = unknownCrossBorderPoints(point1x, point1y);
+                    if (CollectionUtils.isNotEmpty(crossBorderPoints)) {
+                        crossBorderPointsList.add(crossBorderPoints);
+                    }
+                }
+            }
+        }
+        logicByAroundTile(crossBorderPointsList);
+        */
+    }
+
+    private void logicByAroundTile(List<List<Point>> crossBorderPointsList) {
+        for (List<Point> points : crossBorderPointsList) {
+            Point point = points.get(0);
+            List<Point> clickedTiles = getClickedTilesAround(point);
+            if (CollectionUtils.isEmpty(clickedTiles)) {
+                continue;
+            }
         }
     }
 
+    private List<Point> getClickedTilesAround(Point point) {
+        List<Point> points = borderPoints(point.x, point.y, false);
+        return points.stream()
+            .filter(e -> readTile(e.x, e.y).isNumber())
+            .collect(Collectors.toList());
+    }
+
     /**
-     * 周围有未点击/未标记的图块
+     * 根据周围图块逻辑推算
+     */
+    private void logicByAroundTile(int tileX, int tileY) {
+        reloadTileMap();
+        List<Point> pointsFor3x3 = borderPoints(tileX, tileY, true);
+        final List<Point> unknownList = pointsFor3x3.stream()
+            .filter(e -> readTile(e.x, e.y).isUnknown())
+            .collect(Collectors.toList());
+        if (unknownList.size() < 2) {
+            return;
+        }
+        System.out.println("pointsFor3x3=" + StringUtils.join(pointsFor3x3, ", "));
+        while (true) {
+            boolean flag = clickLogic.logicByAroundTile(pointsFor3x3);
+            if (flag) {
+                logicByAroundTile(tileX, tileY);
+            } else {
+                break;
+            }
+        }
+    }
+
+
+
+    /**
+     * 十字型周围有未点击/未标记的图块
      * @param x x
      * @param y x
      * @return 是/否
      */
-    private boolean hasUnknownBorder(IntTile tile, int x, int y) {
+    private List<Point> unknownCrossBorderPoints(int x, int y) {
+        int left = x - 1;
+        int right = x + 1;
+        int top = y - 1;
+        int bottom = y + 1;
+
+        Stream<Point> pointStream = Stream.of(
+            new Point(x, top),
+            new Point(left, y),
+            new Point(right, y),
+            new Point(x, bottom)
+        );
+        long count = pointStream
+            .map(e -> readNullableTile(e.x, e.y))
+            .filter(Objects::nonNull)
+            .count();
+        if (count > 1) {
+            return pointStream
+                .filter(e -> isInTileMap(e.x, e.y))
+                .collect(Collectors.toList());
+        } else {
+            return new ArrayList<>(0);
+        }
+    }
+
+    /**
+     * 四周的最多8个图块
+     */
+    private List<Point> borderPoints(int x, int y, boolean includedParameterAsPointer) {
         int left = x - 1;
         int right = x + 1;
         int top = y - 1;
         int bottom = y + 1;
 
         return Stream.of(
-            readNullableTile(left, top),
-            readNullableTile(x, top),
-            readNullableTile(right, top),
+            new Point(left, top),
+            new Point(x, top),
+            new Point(right, top),
 
-            readNullableTile(left, y),
-            readNullableTile(right, y),
+            new Point(left, y),
+            new Point(x, y),
+            new Point(right, y),
 
-            readNullableTile(left, bottom),
-            readNullableTile(x, bottom),
-            readNullableTile(right, bottom)
+            new Point(left, bottom),
+            new Point(x, bottom),
+            new Point(right, bottom)
         )
-        .filter(Objects::nonNull)
-        .anyMatch(IntTile::isUnknown);
+        .filter(e -> isInTileMap(e.x, e.y))
+        .filter(e -> includedParameterAsPointer || (e.x != x && e.y != y))
+        .collect(Collectors.toList());
+    }
+    /**
+     * 周围有未点击/未标记的图块
+     * @param x x
+     * @param y x
+     * @return 是/否
+     */
+    private boolean hasUnknownBorder(int x, int y) {
+        return borderPoints(x, y, false).stream()
+            .map(e -> readNullableTile(e.x, e.y))
+            .filter(Objects::nonNull)
+            .anyMatch(IntTile::isUnknown);
     }
 
     /**
      * 读取二维数组中的值
      * （注意：不要使用之前获取的值，因为当消除相同图块后，这两个图块的值都已被清空）
      */
-    private IntTile readTile(int x, int y) {
+    public IntTile readTile(int x, int y) {
         return tileMap[x][y];
+    }
+    public IntTile setTile(int x, int y, IntTile newValue) {
+        tileMap[x][y] = newValue;
+        return readTile(x, y);
     }
 
     private IntTile readNullableTile(int x, int y) {
@@ -329,10 +470,10 @@ public class AutoClickMine {
     /**
      * 打印图块二维数组，用于调试
      */
-    private void printTileMap() {
+    public void printTileMap() {
         for (int i = 0; i < tileMap.length; i++) {
             for (int j = 0; j < tileMap[0].length; j++) {
-                System.out.print(tileMap[i][j].getValue() + " ");
+                System.out.print(tileMap[j][i].getValue() + " ");
             }
             System.out.println();
         }
@@ -361,8 +502,8 @@ public class AutoClickMine {
      * @param tileX x
      * @param tileY y
      */
-    private void markTileAsMine(int tileX, int tileY) {
-        readTile(tileX, tileY).setAsMine();
+    public void markTileAsMine(int tileX, int tileY) {
+        setTile(tileX, tileY, IntTile.MINE);
         System.out.println("mark tile(x,y)=" + tileX + "," + tileY);
         Point p = delegate.calculateCenterPosition(tileX, tileY);
         Win32Utils.rightClickWindow(hwnd, p.x, p.y);
