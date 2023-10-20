@@ -1,5 +1,6 @@
 package cn.valuetodays.autotool.mota.common.item;
 
+import cn.valuetodays.autotool.mota.common.MonsterFightData;
 import cn.valuetodays.autotool.mota.common.MotaGameItemEnums;
 import lombok.Data;
 
@@ -19,4 +20,5 @@ public class Mota24Item {
     private Integer defend;
     private Integer gold;
     private Integer exp;
+    private MonsterFightData.Special special = new MonsterFightData.Special();
 }
